@@ -1,0 +1,45 @@
+= PloggingLog API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== 기간 내의 플로깅 기록 조회
+
+=== Request
+
+include::{snippets}/plogginglog-by-period/http-request.adoc[]
+
+include::{snippets}/plogginglog-by-period/query-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/plogginglog-by-period/http-response.adoc[]
+
+== 특정 일의 플로깅 기록 조회
+
+=== Request
+
+include::{snippets}/plogginglog-by-date/http-request.adoc[]
+
+include::{snippets}/plogginglog-by-date/query-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/plogginglog-by-date/http-response.adoc[]
+
+== 최근 플로깅 기록 조회
+
+=== Request
+
+include::{snippets}/plogginglog-by-recent/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/plogginglog-by-recent/http-response.adoc[]

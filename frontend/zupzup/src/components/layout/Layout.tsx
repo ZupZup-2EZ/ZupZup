@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import styled from "styled-components";
+import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 
-import * as utils from "utils";
+import * as utils from 'utils';
 
 const Layout = () => {
   return (

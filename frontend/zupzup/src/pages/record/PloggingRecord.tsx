@@ -1,9 +1,9 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import styled from 'styled-components';
 
-import { CalendarHeader, Calendar, Record, Navigation } from "components";
+import { CalendarHeader, Calendar, Record, Navigation } from 'components';
 
-const FloggingRecord = () => {
+const PloggingRecord = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   return (
@@ -16,7 +16,7 @@ const FloggingRecord = () => {
   );
 };
 
-export default FloggingRecord;
+export default PloggingRecord;
 
 const S = {
   Wrap: styled.div`

@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import { format } from "date-fns";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
-import { isSameMonth, isSameDay, addDays } from "date-fns";
+import { format } from 'date-fns';
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
+import { isSameMonth, isSameDay, addDays } from 'date-fns';
 
-import { CalendarMonth } from "components";
+import { CalendarMonth } from 'components';
 
-import DoubleDashSvg from "assets/icons/double_dash.svg?react";
+import DoubleDashSvg from 'assets/icons/double_dash.svg?react';
 
 interface CalendarProps {
   selectedDate: Date | null;
@@ -40,15 +40,15 @@ const Calendar = (props: CalendarProps) => {
     for (let i = 0; i < 7; i++) {
       days.push(
         <S.Date
-          className={`${isSameMonth(now, day) ? "active" : ""} ${
-            isSameDay(now, day) ? "today" : ""
-          } ${isSameDay(date, day) ? "selected" : ""}`}
+          className={`${isSameMonth(now, day) ? 'active' : ''} ${
+            isSameDay(now, day) ? 'today' : ''
+          } ${isSameDay(date, day) ? 'selected' : ''}`}
           key={day.getTime()}
-          onClick={(e) => selectDate(e)}
+          onClick={e => selectDate(e)}
         >
           <input type="hidden" value={day.toISOString()} />
-          {isSameMonth(now, day) ? format(day, "d") : ""}
-        </S.Date>
+          {isSameMonth(now, day) ? format(day, 'd') : ''}
+        </S.Date>,
       );
 
       if (isSameMonth(now, day)) {
@@ -61,7 +61,7 @@ const Calendar = (props: CalendarProps) => {
       <S.Row key={day.getTime()}>
         <S.Week>{days}</S.Week>
         <S.Dots>{dots}</S.Dots>
-      </S.Row>
+      </S.Row>,
     );
     setCalendar([...row]);
   };
@@ -76,15 +76,15 @@ const Calendar = (props: CalendarProps) => {
       for (let i = 0; i < 7; i++) {
         days.push(
           <S.Date
-            className={`${isSameMonth(now, day) ? "active" : ""} ${
-              isSameDay(now, day) ? "today" : ""
+            className={`${isSameMonth(now, day) ? 'active' : ''} ${
+              isSameDay(now, day) ? 'today' : ''
             }`}
             key={day.getTime()}
-            onClick={(e) => selectDate(e)}
+            onClick={e => selectDate(e)}
           >
             <input type="hidden" value={day.toISOString()} />
-            {isSameMonth(now, day) ? format(day, "d") : ""}
-          </S.Date>
+            {isSameMonth(now, day) ? format(day, 'd') : ''}
+          </S.Date>,
         );
 
         if (isSameMonth(now, day)) {
@@ -97,7 +97,7 @@ const Calendar = (props: CalendarProps) => {
         <S.Row key={day.getTime()}>
           <S.Week>{days}</S.Week>
           <S.Dots>{dots}</S.Dots>
-        </S.Row>
+        </S.Row>,
       );
       days = [];
       dots = [];
@@ -112,7 +112,7 @@ const Calendar = (props: CalendarProps) => {
   return (
     <S.Wrap>
       <CalendarMonth />
-      <S.Calendar className={props.selectedDate === null ? "month" : "week"}>
+      <S.Calendar className={props.selectedDate === null ? 'month' : 'week'}>
         <S.DaysOfWeek>
           <S.NameOfDays>일</S.NameOfDays>
           <S.NameOfDays>월</S.NameOfDays>

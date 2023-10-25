@@ -1,21 +1,26 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-import CalendarSvg from "assets/icons/calendar.svg?react";
-import ProfileSvg from "assets/icons/profile.svg?react";
-import ShoesSvg from "assets/icons/shoes.svg?react";
+import CalendarSvg from 'assets/icons/calendar.svg?react';
+import ProfileSvg from 'assets/icons/profile.svg?react';
+import ShoesSvg from 'assets/icons/shoes.svg?react';
+
+import * as utils from 'utils';
 
 const Navigation = () => {
+  const navigate = useNavigate();
+
   return (
     <S.Wrap>
       <S.Nav>
-        <S.SideButton>
+        <S.SideButton onClick={() => navigate(utils.URL.CALENDAR.CALENDAR)}>
           <CalendarSvg />
         </S.SideButton>
-        <S.MainButton>
+        <S.MainButton onClick={() => navigate(utils.URL.PLOGGING.LOBBY)}>
           <ShoesSvg />
         </S.MainButton>
         <S.SideButton>
-          <ProfileSvg />
+          <ProfileSvg onClick={() => navigate(utils.URL.MYPAGE.HOME)} />
         </S.SideButton>
       </S.Nav>
     </S.Wrap>
@@ -29,6 +34,7 @@ const S = {
     margin: auto 0 0;
     bottom: 0;
     width: 100%;
+    z-index: 9999;
   `,
   Nav: styled.div`
     position: relative;
@@ -58,7 +64,7 @@ const S = {
     box-shadow: 0px 2px 2px 0px rgba(255, 255, 255, 0.25) inset;
 
     &:hover {
-      background-color: ${({ theme }) => theme.color.sub2};
+      background-color: ${({ theme }) => theme.color.sub};
       cursor: pointer;
     }
   `,

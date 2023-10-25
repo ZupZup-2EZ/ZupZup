@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import RunnerSvg from "assets/icons/runner.svg?react";
+import RunnerSvg from 'assets/icons/runner.svg?react';
 
 const CalendarHeader = () => {
   return (

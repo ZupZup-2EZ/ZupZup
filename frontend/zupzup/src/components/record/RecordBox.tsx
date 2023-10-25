@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import ClockSvg from "assets/icons/clock.svg?react";
-import PathSvg from "assets/icons/path.svg?react";
-import DumbbellSvg from "assets/icons/dumbbell.svg?react";
+import ClockSvg from 'assets/icons/clock.svg?react';
+import PathSvg from 'assets/icons/path.svg?react';
+import DumbbellSvg from 'assets/icons/dumbbell.svg?react';
 
 const RecordBox = () => {
   return (
     <S.Wrap>
       <S.Header>2023.10.18 14:23</S.Header>
-      <S.FloggingRecords>
+      <S.PloggingRecords>
         <S.RecordInfoBox>
           <PathSvg />
           <S.RecordInfo>2.4km</S.RecordInfo>
@@ -21,7 +21,7 @@ const RecordBox = () => {
           <DumbbellSvg />
           <S.RecordInfo>230Kcal</S.RecordInfo>
         </S.RecordInfoBox>
-      </S.FloggingRecords>
+      </S.PloggingRecords>
     </S.Wrap>
   );
 };
@@ -46,7 +46,7 @@ const S = {
     font-family: ${({ theme }) => theme.font.family.body3};
     line-height: ${({ theme }) => theme.font.lineheight.body3};
   `,
-  FloggingRecords: styled.div`
+  PloggingRecords: styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;

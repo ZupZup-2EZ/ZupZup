@@ -1,7 +1,7 @@
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from 'styled-components';
 
-import * as styles from "styles";
-import * as router from "router";
+import * as styles from 'styles';
+import * as router from 'router';
 
 const App = () => {
   return (

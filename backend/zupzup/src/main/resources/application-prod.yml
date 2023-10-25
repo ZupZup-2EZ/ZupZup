@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://mariadb:3306/zupzup
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  data:
+    redis:
+      host: redis
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+
+server:
+  servlet:
+    context-path: /api
