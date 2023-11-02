@@ -7,10 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(
-        name = "GoogleOauthClient",
-        url = "https://www.googleapis.com"
-)
+@FeignClient(name = "GoogleOauthClient", url = "https://www.googleapis.com")
 @Component
 public interface GoogleOauthClient {
 

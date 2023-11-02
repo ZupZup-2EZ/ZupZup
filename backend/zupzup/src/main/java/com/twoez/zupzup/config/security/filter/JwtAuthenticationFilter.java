@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.filter;
 
+
 import com.twoez.zupzup.config.security.exception.InvalidAuthorizationHeaderException;
 import com.twoez.zupzup.config.security.jwt.JwtValidator;
 import com.twoez.zupzup.global.util.Assertion;
@@ -33,8 +34,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final LoginUserMapper loginUserMapper;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         log.info("[Filter - START] JwtAuthFilter - {}", request.getRequestURI());
 
         // 1. Bearer 토큰 검증
@@ -43,14 +45,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 4. 유저 정보를 LoginUser에 매핑
         // 5. LoginUser로 Authentication을 만들어서 Security Context에 저장
 
-        getTokenFromHeader(request).ifPresent((bearerToken) -> {
-            String token = validateBearerToken(bearerToken);
-            setAuthenticationInSecurityContext(token);
-        });
+        getTokenFromHeader(request)
+                .ifPresent(
+                        (bearerToken) -> {
+                            String token = validateBearerToken(bearerToken);
+                            setAuthenticationInSecurityContext(token);
+                        });
 
         doFilter(request, response, filterChain);
         log.info("[Filter - END] JwtAuthFilter");
-
     }
 
     private Optional<String> getTokenFromHeader(HttpServletRequest request) {
@@ -65,18 +68,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private boolean isValidBearerToken(String bearerToken) {
-        return StringUtils.hasText(bearerToken) && bearerToken.startsWith(
-                GRANT_TYPE_BEARER);
+        return StringUtils.hasText(bearerToken) && bearerToken.startsWith(GRANT_TYPE_BEARER);
     }
 
     private void setAuthenticationInSecurityContext(String token) {
         Long memberIdInAccessToken = jwtValidator.getMemberIdFromAccessToken(token);
 
         // TODO : 예외 write
-        LoginUser loginUser = loginUserMapper.toLoginUser(
-                memberService.findById(memberIdInAccessToken));
+        LoginUser loginUser =
+                loginUserMapper.toLoginUser(memberService.findById(memberIdInAccessToken));
 
-        SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(loginUser, "", loginUser.getAuthorities()));
+        SecurityContextHolder.getContext()
+                .setAuthentication(
+                        new UsernamePasswordAuthenticationToken(
+                                loginUser, "", loginUser.getAuthorities()));
     }
 }

@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security;
 
+
 import com.twoez.zupzup.config.security.filter.JwtAuthenticationFilter;
 import com.twoez.zupzup.config.security.handler.DefaultAccessDeniedHandler;
 import com.twoez.zupzup.config.security.handler.DefaultAuthenticationEntryPoint;
@@ -49,33 +50,41 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity,
-            HandlerMappingIntrospector introspector)
-            throws Exception {
+    public SecurityFilterChain filterChain(
+            HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         log.info("Security filter chain Setting");
         return httpSecurity
-                .exceptionHandling(config -> config
-                        .accessDeniedHandler(accessDeniedHandler)
-                        .authenticationEntryPoint(authenticationEntryPoint))
+                .exceptionHandling(
+                        config ->
+                                config.accessDeniedHandler(accessDeniedHandler)
+                                        .authenticationEntryPoint(authenticationEntryPoint))
                 .cors(config -> config.configurationSource(corsConfigurationSource()))
                 .csrf(CsrfConfigurer::disable)
-                .authorizeHttpRequests(request ->
-                        request.requestMatchers(
-                                        new MvcRequestMatcher(introspector, "login/**"),
-                                        new MvcRequestMatcher(introspector, "api/v1/auth"),
-                                        new MvcRequestMatcher(introspector, "api/v1/members/health")
-                                ).permitAll()
-                                .requestMatchers(
-                                        new MvcRequestMatcher(introspector, "api/**"))
-                                .authenticated()
-                                .anyRequest().authenticated())
-                .oauth2Login(config -> config
-                        .authorizationEndpoint(
-                                oauthConfig -> oauthConfig.baseUri("/oauth2/authorization"))
-                        .userInfoEndpoint(
-                                endpointConfig -> endpointConfig.oidcUserService(oidcUserService))
-                        .successHandler(successHandler)
-                        .failureHandler(failureHandler))
+                .authorizeHttpRequests(
+                        request ->
+                                request.requestMatchers(
+                                                new MvcRequestMatcher(introspector, "login/**"),
+                                                new MvcRequestMatcher(introspector, "api/v1/auth"),
+                                                new MvcRequestMatcher(
+                                                        introspector, "api/v1/members/health"))
+                                        .permitAll()
+                                        .requestMatchers(
+                                                new MvcRequestMatcher(introspector, "api/**"))
+                                        .authenticated()
+                                        .anyRequest()
+                                        .authenticated())
+                .oauth2Login(
+                        config ->
+                                config.authorizationEndpoint(
+                                                oauthConfig ->
+                                                        oauthConfig.baseUri(
+                                                                "/oauth2/authorization"))
+                                        .userInfoEndpoint(
+                                                endpointConfig ->
+                                                        endpointConfig.oidcUserService(
+                                                                oidcUserService))
+                                        .successHandler(successHandler)
+                                        .failureHandler(failureHandler))
                 .sessionManagement(
                         config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, OAuth2LoginAuthenticationFilter.class)
@@ -94,6 +103,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
-
 }

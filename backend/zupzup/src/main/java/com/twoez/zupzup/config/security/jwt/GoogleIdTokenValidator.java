@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.jwt;
 
+
 import com.twoez.zupzup.config.security.oauth.GoogleOauthProperty;
 import com.twoez.zupzup.member.domain.AuthUser;
 import com.twoez.zupzup.member.domain.OauthProvider;
@@ -10,7 +11,6 @@ import feign.FeignException;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class GoogleIdTokenValidator extends AbstractIdTokenValidator {
 
@@ -19,8 +19,10 @@ public class GoogleIdTokenValidator extends AbstractIdTokenValidator {
 
     private final GoogleOauthClient googleOauthClient;
 
-    public GoogleIdTokenValidator(JwtValidator jwtValidator,
-            GoogleOauthProperty googleOauthProperty, GoogleOauthClient googleOauthClient) {
+    public GoogleIdTokenValidator(
+            JwtValidator jwtValidator,
+            GoogleOauthProperty googleOauthProperty,
+            GoogleOauthClient googleOauthClient) {
         super(jwtValidator, googleOauthProperty.toOidcProperty());
         this.googleOauthClient = googleOauthClient;
     }

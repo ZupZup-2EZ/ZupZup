@@ -30,8 +30,7 @@ public class Member extends BaseTime {
     @Column(name = "member_id")
     private Long id;
 
-    @Embedded
-    private Oauth oauth; // TODO oAuth 바꾸기
+    @Embedded private Oauth oauth; // TODO oAuth 바꾸기
 
     @Column(nullable = false)
     private String name;
@@ -40,14 +39,11 @@ public class Member extends BaseTime {
     @Column(length = 2)
     private Gender gender; // TODO char 타입 바꾸기
 
-    @Column
-    private Integer birthYear;
+    @Column private Integer birthYear;
 
-    @Column
-    private Integer height;
+    @Column private Integer height;
 
-    @Column
-    private Integer weight;
+    @Column private Integer weight;
 
     @Column(nullable = false)
     @ColumnDefault("0")
@@ -57,17 +53,22 @@ public class Member extends BaseTime {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> role;
 
-
     @Column(nullable = false)
     @ColumnDefault("false")
     private Boolean isDeleted;
 
     @Builder
-    public Member(Long id, Oauth oauth,
-            String name, Gender gender,
-            Integer birthYear, Integer height,
-            Integer weight, Long coin,
-            List<Role> role, Boolean isDeleted) {
+    public Member(
+            Long id,
+            Oauth oauth,
+            String name,
+            Gender gender,
+            Integer birthYear,
+            Integer height,
+            Integer weight,
+            Long coin,
+            List<Role> role,
+            Boolean isDeleted) {
         this.id = id;
         this.oauth = oauth;
         this.name = name;
@@ -88,9 +89,6 @@ public class Member extends BaseTime {
     }
 
     public List<SimpleGrantedAuthority> getAuthorities() {
-        return role.stream()
-                .map(Role::name)
-                .map(SimpleGrantedAuthority::new)
-                .toList();
+        return role.stream().map(Role::name).map(SimpleGrantedAuthority::new).toList();
     }
 }

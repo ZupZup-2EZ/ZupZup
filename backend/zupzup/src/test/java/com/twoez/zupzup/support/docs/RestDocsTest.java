@@ -35,8 +35,7 @@ public class RestDocsTest {
     @Autowired private ObjectMapper objectMapper;
     protected MockMvc mockMvc;
 
-    @MockBean
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @MockBean private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     protected String toJson(Object value) throws JsonProcessingException {
         return objectMapper.writeValueAsString(value);

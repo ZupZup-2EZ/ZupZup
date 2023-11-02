@@ -19,7 +19,8 @@ public class PloggingService {
     public Plogger increaseTotalPlogger() {
 
         return ploggerRedisRepository.save(
-                ploggerRedisRepository.findById(TOTAL_PLOGGER)
+                ploggerRedisRepository
+                        .findById(TOTAL_PLOGGER)
                         .map(Plogger::increase)
                         .orElse(new Plogger(TOTAL_PLOGGER, 1L)));
     }
@@ -28,14 +29,16 @@ public class PloggingService {
     public Plogger decreaseTotalPlogger() {
 
         return ploggerRedisRepository.save(
-                ploggerRedisRepository.findById(TOTAL_PLOGGER)
+                ploggerRedisRepository
+                        .findById(TOTAL_PLOGGER)
                         .map(Plogger::decrease)
                         .orElse(new Plogger(TOTAL_PLOGGER, 0L)));
     }
 
     public Plogger searchTotalPlogger() {
 
-        return ploggerRedisRepository.findById(TOTAL_PLOGGER)
+        return ploggerRedisRepository
+                .findById(TOTAL_PLOGGER)
                 .orElse(new Plogger(TOTAL_PLOGGER, 0L));
     }
 }

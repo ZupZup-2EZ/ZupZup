@@ -1,6 +1,6 @@
 package com.twoez.zupzup.config.security;
 
-import com.twoez.zupzup.global.exception.common.UnexpectedException;
+
 import com.twoez.zupzup.global.util.Assertion;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -11,9 +11,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;
 
-/**
- * 요청된 api url을 처리하는 컨트롤러가 있는지 확인합니다.
- */
+/** 요청된 api url을 처리하는 컨트롤러가 있는지 확인합니다. */
 @Component
 @RequiredArgsConstructor
 public class HttpRequestEndpointChecker {

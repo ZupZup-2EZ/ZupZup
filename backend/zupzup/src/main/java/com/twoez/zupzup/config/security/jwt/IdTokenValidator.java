@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.jwt;
 
+
 import com.twoez.zupzup.member.domain.AuthUser;
 import com.twoez.zupzup.member.domain.OauthProvider;
 import lombok.RequiredArgsConstructor;

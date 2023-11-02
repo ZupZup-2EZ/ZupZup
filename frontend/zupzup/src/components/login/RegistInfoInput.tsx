@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ChangeEvent, RefObject } from 'react';
+import { ChangeEvent, RefObject, useState } from 'react';
 import { GENDER } from 'utils';
 
 interface RegistInfoInputProps {
@@ -13,7 +13,7 @@ interface RegistInfoInputProps {
 interface RegistInfoSelectBoxProps {
   title: string;
   value: string;
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
 }
 
 const RegistInfoInput = ({
@@ -30,18 +30,40 @@ const RegistInfoInput = ({
   );
 };
 
-const RegistInfoSelectBox = ({
+const RegistInfoCheckBox = ({
   title,
   value,
   onChange,
 }: RegistInfoSelectBoxProps) => {
+  const [selectedValue, setSelectedValue] = useState(value);
+
+  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedValue(e.target.value);
+    onChange(e.target.value);
+  };
   return (
     <S.InputBox>
       <S.Title>{title}</S.Title>
-      <S.SelectBox value={value} onChange={onChange}>
-        <option value={GENDER.MALE}>남성</option>
-        <option value={GENDER.FEMALE}>여성</option>
-      </S.SelectBox>
+      <S.CheckBox>
+        <label>
+          <input
+            type="radio"
+            value={GENDER.MALE}
+            checked={selectedValue === GENDER.MALE}
+            onChange={handleRadioChange}
+          />
+          <span>남성</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value={GENDER.FEMALE}
+            checked={selectedValue === GENDER.FEMALE}
+            onChange={handleRadioChange}
+          />
+          <span>여성</span>
+        </label>
+      </S.CheckBox>
     </S.InputBox>
   );
 };
@@ -51,25 +73,55 @@ const S = {
     width: 100%;
     padding: 0 18px 30px;
   `,
+
+  CheckBox: styled.div`
+    padding: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    & label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    & span {
+      margin-left: 0.3rem;
+      font-size: ${({ theme }) => theme.font.size.focus2};
+      font-family: ${({ theme }) => theme.font.family.body2};
+    }
+
+    & input[type='radio'] {
+      height: 1.5rem;
+      aspect-ratio: 1;
+      border: calc(1.5rem / 8) solid ${({ theme }) => theme.color.gray3};
+      padding: calc(1.5rem / 8);
+      background: radial-gradient(
+          farthest-side,
+          ${({ theme }) => theme.color.main} 94%,
+          #0000
+        )
+        50%/0 0 no-repeat content-box;
+      border-radius: 50%;
+      outline-offset: calc(1.5rem / 10);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      font-size: inherit;
+      transition: 0.3s;
+    }
+    & input[type='radio']:checked {
+      border-color: ${({ theme }) => theme.color.main};
+      background-size: 100% 100%;
+    }
+  `,
+
   Title: styled.div`
     font-weight: ${({ theme }) => theme.font.weight.body2};
     font-size: ${({ theme }) => theme.font.size.body2};
     font-family: ${({ theme }) => theme.font.family.focus2};
     margin-bottom: 12px;
-  `,
-  SelectBox: styled.select`
-    width: 100%;
-    height: 56px;
-    border: none;
-    background-color: ${({ theme }) => theme.color.gray4};
-    padding: 0 16px;
-    border-radius: 8px;
-    font-weight: ${({ theme }) => theme.font.weight.body3};
-    font-size: ${({ theme }) => theme.font.size.body3};
-    font-family: ${({ theme }) => theme.font.family.body3};
-    &:focus {
-      outline: none;
-    }
   `,
 };
 
@@ -95,8 +147,9 @@ const Input = styled.input`
   }
   &:focus {
     outline: none;
+    border-radius: 0px;
     border-bottom: 1px solid ${({ theme }) => theme.color.main};
   }
 `;
 
-export { RegistInfoInput, RegistInfoSelectBox };
+export { RegistInfoInput, RegistInfoCheckBox };

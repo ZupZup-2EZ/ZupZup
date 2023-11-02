@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.jwt;
 
+
 import com.twoez.zupzup.config.security.exception.InvalidAuthorizationTokenException;
 import com.twoez.zupzup.config.security.exception.InvalidIdTokenException;
 import com.twoez.zupzup.global.exception.HttpExceptionCode;
@@ -45,8 +46,10 @@ public class JwtValidator {
         Object idToken = validatedClaims.getBody().get("idToken");
         Assertion.with(idToken)
                 .setValidation(Objects::nonNull)
-                .validateOrThrow(() -> new InvalidIdTokenException(
-                        HttpExceptionCode.ID_TOKEN_KID_NOT_FOUND));
+                .validateOrThrow(
+                        () ->
+                                new InvalidIdTokenException(
+                                        HttpExceptionCode.ID_TOKEN_KID_NOT_FOUND));
 
         return (String) idToken;
     }
@@ -70,7 +73,8 @@ public class JwtValidator {
         }
     }
 
-    public Map<String, Object> getPayloadFromIdToken(String idToken, String modulus, String exponent) {
+    public Map<String, Object> getPayloadFromIdToken(
+            String idToken, String modulus, String exponent) {
         Jws<Claims> claimsJws = validateSignatureIdToken(idToken, modulus, exponent);
         return claimsJws.getBody();
     }
@@ -109,11 +113,11 @@ public class JwtValidator {
         String memberId = validatedClaims.getBody().getSubject();
         Assertion.with(memberId)
                 .setValidation(Objects::nonNull)
-                .validateOrThrow(() -> new InvalidAuthorizationTokenException(
-                        HttpExceptionCode.MEMBER_ID_NOT_FOUND_IN_ACCESS_TOKEN));
+                .validateOrThrow(
+                        () ->
+                                new InvalidAuthorizationTokenException(
+                                        HttpExceptionCode.MEMBER_ID_NOT_FOUND_IN_ACCESS_TOKEN));
 
         return Long.valueOf(memberId);
     }
-
-
 }

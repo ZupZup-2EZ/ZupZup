@@ -136,7 +136,8 @@ class PloggingLogControllerTest extends RestDocsTest {
         PloggingLogRequest request = PloggingLogFixture.DEFAULT.getPloggingLogRequest();
         PloggingLog ploggingLog = PloggingLogFixture.DEFAULT.getPloggingLog();
 
-        given(ploggingLogService.add(any(PloggingLog.class))).willReturn(ploggingLog);
+        given(ploggingLogService.add(any(PloggingLogRequest.class), any(Long.class)))
+                .willReturn(ploggingLog);
 
         ResultActions perform =
                 mockMvc.perform(

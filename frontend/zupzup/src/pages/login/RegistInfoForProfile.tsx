@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import * as useAuth from 'hooks';
+//! import * as useAuth from 'hooks';
 import * as utils from 'utils';
 import {
   TopNavigation,
   RegistInfoInput,
-  RegistInfoSelectBox,
   RegistInfoTitle,
   RegistInfoFrame,
+  RegistInfoCheckBox,
 } from 'components';
-import { RegistInfo } from 'types/ProfileInfo';
-import { MemberApi } from 'api';
+//! import { RegistInfo } from 'types/ProfileInfo';
+//! import { MemberApi } from 'api';
 
 const RegistInfo = () => {
   const { state } = useLocation();
@@ -20,8 +20,8 @@ const RegistInfo = () => {
   const [gender, setGender] = useState<string>(utils.GENDER.MALE);
   const [isNextButtonDisabled, setNextButtonDisabled] = useState<boolean>(true);
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setGender(event.target.value);
+  const handleSelectChange = (value: string) => {
+    setGender(value);
   };
 
   const inputCheck = (birthYearInput: string | undefined) => {
@@ -47,6 +47,12 @@ const RegistInfo = () => {
       inputRefForBirthYear.current &&
       inputCheck(inputRefForBirthYear.current?.value)
     ) {
+      navigate(utils.URL.RESULT.REGIST);
+    }
+  };
+
+  //!이거 밑에꺼 나중에 넣어야됨! (api 연결되면..)
+  /*
       const postData: RegistInfo = {
         height: state.height,
         weight: state.weight,
@@ -61,15 +67,15 @@ const RegistInfo = () => {
         useAuth.setAccessToken(data.accessToken);
         useAuth.setRefreshToken(data.refreshToken);
         navigate(utils.URL.RESULT.REGIST);
-      } catch (error) {
+
+      }catch (error) {
         console.error('가입정보 전송 에러:', error);
       }
-    }
-  };
+  */
 
   return (
     <RegistInfoFrame.Wrap>
-      <TopNavigation />
+      <TopNavigation navigationTo={utils.URL.LOGIN.REGIST_INFO.PHYSICAL} />
       <RegistInfoTitle
         mainTitle={'나이와 성별을 입력해주세요'}
         subTitle={'칼로리 계산에 사용됩니다'}
@@ -81,7 +87,7 @@ const RegistInfo = () => {
           onChange={handleInputChange}
           title="출생 연도"
         />
-        <RegistInfoSelectBox
+        <RegistInfoCheckBox
           title="성별"
           value={gender}
           onChange={handleSelectChange}

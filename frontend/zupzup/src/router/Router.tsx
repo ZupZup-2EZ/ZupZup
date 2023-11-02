@@ -9,7 +9,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path={utils.URL.MAIN.HOME} element={<Layout />}>
-          <Route path="/" element={<pages.OnBoarding />} />
+          <Route path="/" element={<pages.LoginOnboard />} />
           <Route
             path={utils.URL.CALENDAR.CALENDAR}
             element={<pages.PloggingRecord />}
@@ -84,9 +84,14 @@ const Router = () => {
             path={utils.URL.RESULT.OPINION}
             element={<pages.OpinionSuccess />}
           />
+
           <Route
             path={utils.URL.ONBORDING.CHARACTER}
             element={<pages.CharacterInfo />}
+          />
+          <Route
+            path={utils.URL.ONBORDING.EXPLAIN}
+            element={<pages.OnBoarding />}
           />
 
           <Route

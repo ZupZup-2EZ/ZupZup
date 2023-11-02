@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.domain;
 
+
 import java.util.List;
 import lombok.Builder;
 import lombok.ToString;

@@ -1,6 +1,5 @@
 package com.twoez.zupzup.plogging.controller;
 
-
 import static com.twoez.zupzup.support.docs.ApiDocumentUtils.getDocumentRequest;
 import static com.twoez.zupzup.support.docs.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.BDDMockito.given;
@@ -32,21 +31,16 @@ public class PloggingControllerTest extends RestDocsTest {
     void ploggerAddTest() throws Exception {
         Plogger plogger = new Plogger(TOTAL_PLOGGER, 0L);
 
-        given(ploggingService.increaseTotalPlogger())
-                .willReturn(plogger.increase());
+        given(ploggingService.increaseTotalPlogger()).willReturn(plogger.increase());
 
-        ResultActions perform = mockMvc.perform(
-                put("/api/v1/ploggings/start")
-                        .contentType(MediaType.APPLICATION_JSON));
+        ResultActions perform =
+                mockMvc.perform(
+                        put("/api/v1/ploggings/start").contentType(MediaType.APPLICATION_JSON));
 
-        perform.andExpect(status().isOk())
-                .andExpect(jsonPath("$.results.totalPlogger").value(1L));
+        perform.andExpect(status().isOk()).andExpect(jsonPath("$.results.totalPlogger").value(1L));
 
         perform.andDo(print())
-                .andDo(
-                        document("plogger-add",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
+                .andDo(document("plogger-add", getDocumentRequest(), getDocumentResponse()));
     }
 
     @Test
@@ -54,21 +48,16 @@ public class PloggingControllerTest extends RestDocsTest {
     void ploggerRemoveTest() throws Exception {
         Plogger plogger = new Plogger(TOTAL_PLOGGER, 1L);
 
-        given(ploggingService.decreaseTotalPlogger())
-                .willReturn(plogger.decrease());
+        given(ploggingService.decreaseTotalPlogger()).willReturn(plogger.decrease());
 
-        ResultActions perform = mockMvc.perform(
-                put("/api/v1/ploggings/finish")
-                        .contentType(MediaType.APPLICATION_JSON));
+        ResultActions perform =
+                mockMvc.perform(
+                        put("/api/v1/ploggings/finish").contentType(MediaType.APPLICATION_JSON));
 
-        perform.andExpect(status().isOk())
-                .andExpect(jsonPath("$.results.totalPlogger").value(0L));
+        perform.andExpect(status().isOk()).andExpect(jsonPath("$.results.totalPlogger").value(0L));
 
         perform.andDo(print())
-                .andDo(
-                        document("plogger-remove",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
+                .andDo(document("plogger-remove", getDocumentRequest(), getDocumentResponse()));
     }
 
     @Test
@@ -76,19 +65,18 @@ public class PloggingControllerTest extends RestDocsTest {
     void ploggerRemoveExceptionTest() throws Exception {
         Plogger plogger = new Plogger(TOTAL_PLOGGER, 0L);
 
-        given(ploggingService.decreaseTotalPlogger())
-                .willReturn(plogger.decrease());
+        given(ploggingService.decreaseTotalPlogger()).willReturn(plogger.decrease());
 
-        ResultActions perform = mockMvc.perform(
-                put("/api/v1/ploggings/finish")
-                        .contentType(MediaType.APPLICATION_JSON));
+        ResultActions perform =
+                mockMvc.perform(
+                        put("/api/v1/ploggings/finish").contentType(MediaType.APPLICATION_JSON));
 
-        perform.andExpect(status().isOk())
-                .andExpect(jsonPath("$.results.totalPlogger").value(0L));
+        perform.andExpect(status().isOk()).andExpect(jsonPath("$.results.totalPlogger").value(0L));
 
         perform.andDo(print())
                 .andDo(
-                        document("plogger-remove-exception",
+                        document(
+                                "plogger-remove-exception",
                                 getDocumentRequest(),
                                 getDocumentResponse()));
     }
@@ -98,20 +86,16 @@ public class PloggingControllerTest extends RestDocsTest {
     void ploggerDetailsTest() throws Exception {
         Plogger plogger = new Plogger(TOTAL_PLOGGER, 10L);
 
-        given(ploggingService.searchTotalPlogger())
-                .willReturn(plogger);
+        given(ploggingService.searchTotalPlogger()).willReturn(plogger);
 
-        ResultActions perform = mockMvc.perform(
-                get("/api/v1/ploggings/number-of-users")
-                        .contentType(MediaType.APPLICATION_JSON));
+        ResultActions perform =
+                mockMvc.perform(
+                        get("/api/v1/ploggings/number-of-users")
+                                .contentType(MediaType.APPLICATION_JSON));
 
-        perform.andExpect(status().isOk())
-                .andExpect(jsonPath("$.results.totalPlogger").value(10L));
+        perform.andExpect(status().isOk()).andExpect(jsonPath("$.results.totalPlogger").value(10L));
 
         perform.andDo(print())
-                .andDo(
-                        document("plogger-details",
-                                getDocumentRequest(),
-                                getDocumentResponse()));
+                .andDo(document("plogger-details", getDocumentRequest(), getDocumentResponse()));
     }
 }

@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.domain;
 
+
 import java.util.Collection;
 import java.util.Map;
 import lombok.Getter;
@@ -13,7 +14,9 @@ public class LoginUser implements OAuth2User {
     private final Map<String, Object> attributes;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public LoginUser(Member member, Map<String, Object> attributes,
+    public LoginUser(
+            Member member,
+            Map<String, Object> attributes,
             Collection<? extends GrantedAuthority> authorities) {
         this.member = member;
         this.attributes = attributes;
@@ -33,5 +36,9 @@ public class LoginUser implements OAuth2User {
     @Override
     public String getName() {
         return member.getId().toString();
+    }
+
+    public Long getMemberId() {
+        return member.getId();
     }
 }

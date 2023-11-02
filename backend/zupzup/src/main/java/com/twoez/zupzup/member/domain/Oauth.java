@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.domain;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;

@@ -2,6 +2,7 @@ export const URL = {
   ONBORDING: {
     WORKING: '/working',
     CHARACTER: '/info/character',
+    EXPLAIN: '/onboard',
   },
   OPINION: '/opinion',
   LOGIN: {

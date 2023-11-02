@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.domain;
 
+
 import com.twoez.zupzup.member.exception.OauthProviderNotFoundException;
 import java.util.Arrays;
 import lombok.Getter;

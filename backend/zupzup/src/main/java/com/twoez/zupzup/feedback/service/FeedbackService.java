@@ -1,6 +1,7 @@
 package com.twoez.zupzup.feedback.service;
 
 
+import com.twoez.zupzup.feedback.controller.dto.FeedbackAddRequest;
 import com.twoez.zupzup.feedback.domain.Feedback;
 import com.twoez.zupzup.feedback.repository.FeedbackRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,11 @@ public class FeedbackService {
     private final FeedbackRepository feedbackRepository;
 
     @Transactional
-    public void add(Feedback feedback) {
-
-        feedbackRepository.save(feedback);
+    public void add(FeedbackAddRequest request) {
+        feedbackRepository.save(request.toEntity());
     }
 
     public Page<Feedback> searchAll(Pageable pageable) {
-
         return feedbackRepository.findAllByOrderByIdDesc(pageable);
     }
 }

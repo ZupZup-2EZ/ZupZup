@@ -1,5 +1,6 @@
 package com.twoez.zupzup.global.exception.common;
 
+
 import com.twoez.zupzup.global.exception.ApplicationException;
 import com.twoez.zupzup.global.exception.HttpExceptionCode;
 

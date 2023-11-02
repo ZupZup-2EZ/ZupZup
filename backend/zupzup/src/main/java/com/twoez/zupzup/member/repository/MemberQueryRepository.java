@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.repository;
 
+
 import com.twoez.zupzup.global.querydsl.QuerydslRepositorySupport;
 import com.twoez.zupzup.member.domain.Member;
 import com.twoez.zupzup.member.domain.Oauth;
@@ -18,14 +19,10 @@ public class MemberQueryRepository extends QuerydslRepositorySupport {
     }
 
     public Optional<Member> findByOauth(Oauth oauth) {
-        Member searchedMember = selectFrom(member)
-                .where(member.oauth.eq(oauth).and(member.isDeleted.isFalse()))
-                .fetchOne();
+        Member searchedMember =
+                selectFrom(member)
+                        .where(member.oauth.eq(oauth).and(member.isDeleted.isFalse()))
+                        .fetchOne();
         return Optional.ofNullable(searchedMember);
     }
-
-
-
-
-
 }

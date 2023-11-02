@@ -1,5 +1,6 @@
 package com.twoez.zupzup.plogging.domain;
 
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,7 @@ import org.springframework.data.redis.core.RedisHash;
 @RedisHash(value = "plogger")
 public class Plogger {
 
-    @Id
-    private String id;
+    @Id private String id;
 
     private Long total;
 

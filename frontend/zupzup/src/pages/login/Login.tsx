@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import { SocialLoginButton } from 'components';
-import { SOCIAL_KEY } from 'utils';
+import { SOCIAL_KEY, URL } from 'utils';
 
 import KakaoIcon from 'assets/icons/Kakao_logo.svg?react';
 import NaverIcon from 'assets/icons/Naver_logo.svg?react';
@@ -32,7 +32,7 @@ const Login = () => {
         <SocialLoginButton
           backgroundColor="#06BE34"
           color="#FFFFFF"
-          onClick={() => navigate('/success-regist')}
+          onClick={() => navigate(URL.LOGIN.REGIST_INFO.PHYSICAL)}
           // onClick={() => handleSocialLogin(SOCIAL_KEY.NAVER)}
         >
           <NaverIcon />

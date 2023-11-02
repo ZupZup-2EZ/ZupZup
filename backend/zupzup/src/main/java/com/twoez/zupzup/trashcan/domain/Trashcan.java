@@ -1,13 +1,13 @@
 package com.twoez.zupzup.trashcan.domain;
 
+
 import com.twoez.zupzup.global.audit.BaseTime;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -44,15 +44,16 @@ public class Trashcan extends BaseTime {
     private Boolean isDeleted;
 
     @Builder
-    public Trashcan(Long id,
-                    BigDecimal latitude,
-                    BigDecimal longitude,
-                    String trashcanType,
-                    String guName,
-                    String roadName,
-                    String address,
-                    String locationType,
-                    Boolean isDeleted) {
+    public Trashcan(
+            Long id,
+            BigDecimal latitude,
+            BigDecimal longitude,
+            String trashcanType,
+            String guName,
+            String roadName,
+            String address,
+            String locationType,
+            Boolean isDeleted) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -64,4 +65,3 @@ public class Trashcan extends BaseTime {
         this.isDeleted = isDeleted;
     }
 }
-

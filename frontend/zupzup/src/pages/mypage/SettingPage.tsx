@@ -29,6 +29,13 @@ const Setting = () => {
       </S.SettingSection>
 
       <S.SettingSection>
+        <S.SubTitle>앱 설정</S.SubTitle>
+        <SettingComponent
+          text="튜토리얼 확인하기"
+          onClick={() => navigate(utils.URL.ONBORDING.EXPLAIN)}
+        />
+      </S.SettingSection>
+      <S.SettingSection>
         <S.SubTitle>계정</S.SubTitle>
         <SettingComponent
           text="로그아웃"

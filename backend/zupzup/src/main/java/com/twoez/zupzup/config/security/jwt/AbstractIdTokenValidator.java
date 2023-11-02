@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.jwt;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twoez.zupzup.config.security.dto.JwtHeader;
@@ -32,8 +33,8 @@ public abstract class AbstractIdTokenValidator {
         OidcPublicKey oidcPublicKey = getOidcPublicKeyByKid(kid);
 
         // publicKey로 payload를 얻어낸다.
-        Map<String, Object> payload = jwtValidator.getPayloadFromIdToken(idToken, oidcPublicKey.n(),
-                oidcPublicKey.e());
+        Map<String, Object> payload =
+                jwtValidator.getPayloadFromIdToken(idToken, oidcPublicKey.n(), oidcPublicKey.e());
 
         // payload로부터 AuthUser를 얻어내서 반환한다.
         return extractUserInfo(payload);
@@ -72,6 +73,4 @@ public abstract class AbstractIdTokenValidator {
     public abstract OidcPublicKeyList getOidcPublicKeys();
 
     public abstract AuthUser extractUserInfo(Map<String, Object> payload);
-
-
 }

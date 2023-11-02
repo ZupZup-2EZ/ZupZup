@@ -23,8 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class MockSecurityFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) {
-    }
+    public void init(FilterConfig filterConfig) {}
 
     @Override
     public void destroy() {
@@ -36,13 +35,16 @@ public class MockSecurityFilter implements Filter {
             throws IOException, ServletException {
         Member member = createMember();
 
-        LoginUser loginUser = new LoginUser(member, new HashMap<>(Map.of("id", member.getId())),
-                member.getAuthorities());
+        LoginUser loginUser =
+                new LoginUser(
+                        member,
+                        new HashMap<>(Map.of("id", member.getId())),
+                        member.getAuthorities());
 
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-                loginUser,
-                "password",
-                loginUser.getAuthorities()));
+        SecurityContextHolder.getContext()
+                .setAuthentication(
+                        new UsernamePasswordAuthenticationToken(
+                                loginUser, "password", loginUser.getAuthorities()));
 
         chain.doFilter(request, response);
     }

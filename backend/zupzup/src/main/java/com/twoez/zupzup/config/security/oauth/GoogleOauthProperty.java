@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.oauth;
 
+
 import com.twoez.zupzup.config.security.jwt.OidcProperty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

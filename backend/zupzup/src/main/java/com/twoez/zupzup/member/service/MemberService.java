@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.service;
 
+
 import com.twoez.zupzup.config.security.jwt.AuthorizationToken;
 import com.twoez.zupzup.config.security.jwt.JwtProvider;
 import com.twoez.zupzup.global.exception.HttpExceptionCode;
@@ -49,15 +50,13 @@ public class MemberService {
                 memberHealthRequest.birthYear(),
                 memberHealthRequest.gender(),
                 memberHealthRequest.height(),
-                memberHealthRequest.weight()
-        );
+                memberHealthRequest.weight());
     }
 
     public Member findById(Long memberId) {
         log.info("findById Service - memberId : {}", memberId);
-        return memberSpringDataRepository.findMemberByIsDeletedIsFalseAndIdEquals(memberId)
-                .orElseThrow(
-                        () -> new MemberQueryException(HttpExceptionCode.MEMBER_NOT_FOUND));
+        return memberSpringDataRepository
+                .findMemberByIsDeletedIsFalseAndIdEquals(memberId)
+                .orElseThrow(() -> new MemberQueryException(HttpExceptionCode.MEMBER_NOT_FOUND));
     }
-
 }

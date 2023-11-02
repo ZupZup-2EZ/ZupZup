@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import * as utils from 'utils';
+import ArrowSvg from 'assets/icons/angle-right.svg?react';
 
 import { SuccessAnimation, ConfirmButton } from 'components';
 
@@ -15,9 +16,16 @@ const RegistSuccess = () => {
       </S.TitleFrame>
       <SuccessAnimation />
       <S.BottomFrame>
-        <ConfirmButton
-          text="플로깅 시작하기"
+        <div
+          className="skip"
           onClick={() => navigate(utils.URL.PLOGGING.LOBBY)}
+        >
+          건너뛸게요
+          <ArrowSvg />
+        </div>
+        <ConfirmButton
+          text="튜토리얼 보러가기"
+          onClick={() => navigate(utils.URL.ONBORDING.EXPLAIN)}
         />
       </S.BottomFrame>
     </S.Wrap>
@@ -60,6 +68,20 @@ const S = {
     bottom: 0;
     width: 100%;
     margin: auto 0 50px 0;
+
+    & div {
+      cursor: pointer;
+      margin-top: 20px;
+      font-family: ${({ theme }) => theme.font.family.focus2};
+      font-size: ${({ theme }) => theme.font.size.focus2};
+    }
+
+    & .skip {
+      display: flex;
+      align-items: center;
+      color: ${({ theme }) => theme.color.gray2};
+      gap: 3px;
+    }
   `,
 };
 export default RegistSuccess;

@@ -1,4 +1,4 @@
-export { default as OnBoarding } from './onboard/OnBoarding';
+export { default as LoginOnboard } from './onboard/Main';
 
 export { default as PloggingRecord } from './record/PloggingRecord';
 
@@ -29,3 +29,4 @@ export { default as Opinion } from './common/Opinion';
 export { default as OpinionSuccess } from './common/OpinionSuccess';
 
 export { default as CharacterInfo } from './onboard/CharacterInfo';
+export { default as OnBoarding } from './onboard/OnBoarding';

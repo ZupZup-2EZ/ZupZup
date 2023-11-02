@@ -1,13 +1,7 @@
 package com.twoez.zupzup.fixture.trashcan;
 
-import com.twoez.zupzup.trashcan.domain.Trashcan;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import org.junit.jupiter.api.Test;
 
+import com.twoez.zupzup.trashcan.domain.Trashcan;
 import java.math.BigDecimal;
 
 public enum TrashcanFixture {
@@ -20,20 +14,18 @@ public enum TrashcanFixture {
             "멀캠",
             "멀캠",
             "상가지역",
-            false
-    ),
+            false),
 
     RECYCLE(
             1L,
             BigDecimal.valueOf(37.501285201600155),
             BigDecimal.valueOf(127.03957639050276),
-                    "재활용",
-                    "멀캠",
-                    "멀캠",
-                    "멀캠",
-                    "상가지역",
-                    false
-                    );
+            "재활용",
+            "멀캠",
+            "멀캠",
+            "멀캠",
+            "상가지역",
+            false);
 
     private Long id;
 
@@ -53,16 +45,16 @@ public enum TrashcanFixture {
 
     private Boolean isDeleted;
 
-    TrashcanFixture(Long id,
-                    BigDecimal latitude,
-                    BigDecimal longitude,
-                    String trashcanType,
-                    String guName,
-                    String roadName,
-                    String address,
-                    String locationType,
-                    Boolean isDeleted)
-    {
+    TrashcanFixture(
+            Long id,
+            BigDecimal latitude,
+            BigDecimal longitude,
+            String trashcanType,
+            String guName,
+            String roadName,
+            String address,
+            String locationType,
+            Boolean isDeleted) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -74,7 +66,7 @@ public enum TrashcanFixture {
         this.isDeleted = isDeleted;
     }
 
-    public Trashcan getTrashcan(){
+    public Trashcan getTrashcan() {
         return Trashcan.builder()
                 .id(id)
                 .latitude(latitude)
@@ -89,11 +81,7 @@ public enum TrashcanFixture {
     }
 
     public Trashcan getCustomTrashcan(
-            Long id,
-            BigDecimal latitude,
-            BigDecimal longitude,
-            String guName
-    ){
+            Long id, BigDecimal latitude, BigDecimal longitude, String guName) {
         return Trashcan.builder()
                 .id(id)
                 .latitude(latitude)
@@ -106,6 +94,4 @@ public enum TrashcanFixture {
                 .isDeleted(isDeleted)
                 .build();
     }
-
-
 }

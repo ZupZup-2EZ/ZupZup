@@ -1,6 +1,6 @@
 package com.twoez.zupzup.member.service;
 
-import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;

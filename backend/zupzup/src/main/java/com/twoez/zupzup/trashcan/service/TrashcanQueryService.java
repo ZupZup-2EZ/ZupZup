@@ -1,14 +1,13 @@
 package com.twoez.zupzup.trashcan.service;
 
+
 import com.twoez.zupzup.trashcan.domain.Trashcan;
 import com.twoez.zupzup.trashcan.repository.TrashcanQueryRepository;
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)

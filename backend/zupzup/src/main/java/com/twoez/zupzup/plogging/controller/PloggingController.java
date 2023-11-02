@@ -20,21 +20,18 @@ public class PloggingController {
     @PutMapping("/start")
     public ApiResponse<PloggerResponse> ploggerAdd() {
 
-        return ApiResponse.ok(
-                PloggerResponse.from(ploggingService.increaseTotalPlogger()));
+        return ApiResponse.ok(PloggerResponse.from(ploggingService.increaseTotalPlogger()));
     }
 
     @PutMapping("/finish")
     public ApiResponse<PloggerResponse> ploggerRemove() {
 
-        return ApiResponse.ok(
-                PloggerResponse.from(ploggingService.decreaseTotalPlogger()));
+        return ApiResponse.ok(PloggerResponse.from(ploggingService.decreaseTotalPlogger()));
     }
 
     @GetMapping("/number-of-users")
     public ApiResponse<PloggerResponse> ploggerDetails() {
 
-        return ApiResponse.ok(
-                PloggerResponse.from(ploggingService.searchTotalPlogger()));
+        return ApiResponse.ok(PloggerResponse.from(ploggingService.searchTotalPlogger()));
     }
 }

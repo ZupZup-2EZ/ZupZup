@@ -15,11 +15,11 @@ const RegistInfoFrame = {
   `,
 
   Wrap: styled.div`
+    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100dvh;
-    background-color: ${({ theme }) => theme.color.background};
   `,
 
   NextButton: styled.div<ButtonProps>`

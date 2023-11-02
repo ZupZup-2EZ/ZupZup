@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public enum RouteFixture {
-    DEFAULT(1L, IntStream.range(0, 10)
-                    .mapToObj(idx -> Location.of(
-                            BigDecimal.valueOf(idx),
-                            BigDecimal.valueOf(idx + 1)))
+    DEFAULT(
+            1L,
+            IntStream.range(0, 10)
+                    .mapToObj(
+                            idx ->
+                                    Location.of(
+                                            BigDecimal.valueOf(idx), BigDecimal.valueOf(idx + 1)))
                     .toList());
     private Long id;
     private List<Location> locations;

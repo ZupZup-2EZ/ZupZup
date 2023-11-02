@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.cache;
 
+
 import java.util.List;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,5 +19,4 @@ public class LocalCacheConfig {
         simpleCacheManager.setCaches(List.of(new ConcurrentMapCache("googlePublicKeys")));
         return simpleCacheManager;
     }
-
 }

@@ -1,5 +1,6 @@
 package com.twoez.zupzup.member.controller;
 
+
 import com.twoez.zupzup.config.security.jwt.AuthorizationToken;
 import com.twoez.zupzup.global.response.ApiResponse;
 import com.twoez.zupzup.member.controller.dto.AuthRequest;
@@ -28,8 +29,7 @@ public class AuthController {
 
     @PostMapping
     public ApiResponse<AuthResponse> authorizeUser(
-            @RequestBody @Validated AuthRequest authRequest
-    ) {
+            @RequestBody @Validated AuthRequest authRequest) {
         log.info("AuthRequest : {}", authRequest);
 
         AuthUser authUser = idTokenService.extractAuthUser(authRequest);
@@ -51,5 +51,4 @@ public class AuthController {
 
         return ApiResponse.ok(authResponse);
     }
-
 }

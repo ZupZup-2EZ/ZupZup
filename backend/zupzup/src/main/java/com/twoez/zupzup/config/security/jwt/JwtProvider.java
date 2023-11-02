@@ -1,5 +1,6 @@
 package com.twoez.zupzup.config.security.jwt;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,9 +14,7 @@ import java.util.Map;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 
-/**
- * 인증 완료 후 유저에 대한 token을 발급해주는 Provider
- */
+/** 인증 완료 후 유저에 대한 token을 발급해주는 Provider */
 @Component
 public class JwtProvider {
 
@@ -35,6 +34,7 @@ public class JwtProvider {
 
     /**
      * IdToken을 담은 Jwt 생성
+     *
      * @return
      */
     public String createAuthToken(OidcUser oidcUser) {
@@ -68,5 +68,4 @@ public class JwtProvider {
                 .setExpiration(Date.from(expiredTime))
                 .compact();
     }
-
 }
