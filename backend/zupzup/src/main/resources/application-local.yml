@@ -17,12 +17,26 @@ spring:
     mongodb:
       uri: ${MONGO_URI}
       database: ${MONGO_DATABASE}
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: health, info, metrics, prometheus
   config:
     import: application-security.yml
 
+
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: health, info, metrics
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+  server:
+    port: 8090
 

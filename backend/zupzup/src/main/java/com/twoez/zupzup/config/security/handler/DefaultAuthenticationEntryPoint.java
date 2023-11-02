@@ -49,13 +49,6 @@ public class DefaultAuthenticationEntryPoint extends Http403ForbiddenEntryPoint 
                         throw new RuntimeException(e);
                     }
                 });
-        log.info("msg : {}", arg2.getMessage());
-        log.info("Cause : {}", arg2.getCause());
-        StackTraceElement[] stackTrace = arg2.getStackTrace();
-        log.info("StackTrace");
-        for (StackTraceElement st : stackTrace) {
-            log.info("stack : {}", st);
-        }
         super.commence(request, response, arg2);
     }
 }
