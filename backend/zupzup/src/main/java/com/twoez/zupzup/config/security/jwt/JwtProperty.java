@@ -28,25 +28,6 @@ public class JwtProperty {
 
     @Bean
     public Key getKey() {
-        Assertion.with(secretKey)
-                .setValidation((key) -> key.startsWith("$"))
-                .validateOrThrow(EmptyEnvironmentVariableException::new);
-        Assertion.with(secretKey)
-                .setValidation((key) -> key.equals("${JWT_SECRET_KEY}"))
-                .validateOrThrow(ShortEnvironmentVariableException::new);
-//        Assertion.with(secretKey)
-//                .setValidation((key) -> key.equals("${JWT_SECRET_KEY}"))
-//                .validateOrThrow(InvalidEnvironmentVariableException::new);
-//        Assertion.with(secretKey)
-//                .setValidation((key) -> Character.isDigit(key.charAt(0)))
-//                .validateOrThrow(WrongEnvironmentVariableException::new);
-//        Assertion.with(secretKey)
-//                .setValidation((key) -> key.startsWith("win"))
-//                .validateOrThrow(InvalidEnvironmentVariableException::new);
-//        Assertion.with(secretKey)
-//                .setValidation((key) -> key.length() == 300)
-//                .validateOrThrow(WrongEnvironmentVariableException::new);
-
         return Keys.hmacShaKeyFor(Base64.encode(secretKey.getBytes()));
     }
 }

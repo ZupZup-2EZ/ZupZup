@@ -56,7 +56,6 @@ public class DefaultAuthenticationEntryPoint extends Http403ForbiddenEntryPoint 
         for (StackTraceElement st : stackTrace) {
             log.info("stack : {}", st);
         }
-
         super.commence(request, response, arg2);
     }
 }
