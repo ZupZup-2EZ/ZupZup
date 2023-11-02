@@ -15,6 +15,7 @@ export { default as RegistInfoProfile } from './login/RegistInfoForProfile';
 export { default as MyPage } from './mypage/MyPage';
 export { default as MyPloggingReport } from './mypage/MyPloggingReport';
 export { default as SettingPage } from './mypage/SettingPage';
+export { default as Theme } from './mypage/Theme';
 export { default as ProfileSettingPage } from './mypage/ProfileSettingPage';
 
 export { default as ShoppingList } from './shop/ShoppingList';

@@ -41,6 +41,7 @@ export const URL = {
   SETTING: {
     HOME: '/setting',
     PROFILE: '/setting/profile',
+    THEME: '/setting/theme',
   },
 };
 

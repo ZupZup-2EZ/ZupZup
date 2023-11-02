@@ -22,12 +22,29 @@ import org.springframework.context.annotation.Configuration;
 public class JwtProperty {
 
     private String secretKey;
-    private Integer authTokenExpiredSecond;
-    private Integer accessExpiredSecond;
-    private Integer refreshExpiredSecond;
+
+    // TODO : Integer로 주입받는 방식 알아보기
+    private String authTokenExpiredSecond;
+    private String accessExpiredSecond;
+    private String refreshExpiredSecond;
 
     @Bean
     public Key getKey() {
         return Keys.hmacShaKeyFor(Base64.encode(secretKey.getBytes()));
+    }
+
+    @Bean
+    public Integer getAuthTokenExpiredSecond() {
+        return Integer.parseInt(authTokenExpiredSecond);
+    }
+
+    @Bean
+    public Integer getRefreshExpiredSecond() {
+        return Integer.parseInt(refreshExpiredSecond);
+    }
+
+    @Bean
+    public Integer getAccessExpiredSecond() {
+        return Integer.parseInt(accessExpiredSecond);
     }
 }

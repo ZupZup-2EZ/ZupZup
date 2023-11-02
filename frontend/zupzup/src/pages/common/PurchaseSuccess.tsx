@@ -11,7 +11,7 @@ const PurchaseSuccess = () => {
     <S.Wrap>
       <S.TitleFrame>
         <S.MainTitle>음~ 맛있는 식사였다고 하네요</S.MainTitle>
-        <S.SubTitle>줍줍님의 성장도가 증가하였어요 🎉</S.SubTitle>
+        <S.SubTitle>줍줍님의 성장도가 +3 증가하였어요 🎉</S.SubTitle>
       </S.TitleFrame>
       <S.GIF src={character} alt="eating..." />
       <S.BottomFrame>

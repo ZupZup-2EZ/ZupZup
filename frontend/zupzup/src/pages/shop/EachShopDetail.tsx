@@ -8,7 +8,7 @@ import axios from 'api/apiController';
 
 const FoodDetail: FoodDetail = {
   id: 2,
-  image: `/assets/images/food/food4.png`,
+  image: `https://zupzup-assets.s3.ap-northeast-2.amazonaws.com/food/소시지.png`,
   name: '햄버거',
   coin: 4,
   exp: 3,

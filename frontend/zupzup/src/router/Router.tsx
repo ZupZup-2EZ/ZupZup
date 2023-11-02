@@ -78,6 +78,7 @@ const Router = () => {
             path={utils.URL.SETTING.PROFILE}
             element={<pages.ProfileSettingPage />}
           />
+          <Route path={utils.URL.SETTING.THEME} element={<pages.Theme />} />
 
           <Route path={utils.URL.OPINION} element={<pages.Opinion />} />
           <Route
