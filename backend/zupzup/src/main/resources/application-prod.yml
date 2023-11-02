@@ -17,5 +17,12 @@ spring:
       database: ${MONGO_DATABASE}
       username: ${MONGO_USERNAME}
       password: ${MONGO_PASSWORD}
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: health, info, metrics, prometheus
+    config:
+      import: application-security.yml
 
 

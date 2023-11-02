@@ -17,28 +17,12 @@ spring:
     mongodb:
       uri: ${MONGO_URI}
       database: ${MONGO_DATABASE}
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
-            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-            scope: email, profile, openid
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info, metrics, prometheus
+  config:
+    import: application-security.yml
 
-oidc:
-  google:
-    iss: https://accounts.google.com
-    iss2: accounts.google.com
 
-client:
-  url: ${CLIENT_URL}
-  redirect:
-    login-success: ${CLIENT_REDIRECT_LOGIN_SUCCESS}
-
-jwt:
-  secret-key: ${JWT_SECRET_KEY}
-  auth-token-expired_second: 60
-  access-expired-second: 7200
-  refresh_expired_second: 1209600
