@@ -12,37 +12,29 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
 /** 인증 완료 후 유저에 대한 token을 발급해주는 Provider */
-@Component
-public class JwtProvider {
+public abstract class AbstractJwtProvider {
 
-    private static final String GRANT_TYPE = "Bearer";
+    protected static final String GRANT_TYPE = "Bearer";
 
-    private final Key secretKey;
-    private final Integer authTokenExpiredSecond;
-    private final Integer accessExpiredSecond;
-    private final Integer refreshExpiredSecond;
+    protected final Key secretKey;
+    protected final Integer authTokenExpiredSecond;
+    protected final Integer accessExpiredSecond;
+    protected final Integer refreshExpiredSecond;
 
-    public JwtProvider(JwtProperty jwtProperty) {
+    protected AbstractJwtProvider(JwtProperty jwtProperty) {
         this.secretKey = jwtProperty.getKey();
         this.authTokenExpiredSecond = jwtProperty.getAuthTokenExpiredSecond();
         this.accessExpiredSecond = jwtProperty.getAccessExpiredSecond();
         this.refreshExpiredSecond = jwtProperty.getRefreshExpiredSecond();
     }
 
-    /**
-     * IdToken을 담은 Jwt 생성
-     *
-     * @return
-     */
-    public String createAuthToken(OidcUser oidcUser) {
-        Map<String, Object> idTokenAttribute = new HashMap<>();
-        idTokenAttribute.put("idToken", oidcUser.getIdToken().getTokenValue());
-        Claims claims = new DefaultClaims(idTokenAttribute);
-        return generateToken(oidcUser, claims, authTokenExpiredSecond);
-    }
+    public abstract String createAuthToken(OAuth2User oAuth2User);
+
+    protected abstract String generateToken(OAuth2User oAuth2User, Claims claims, Integer validationSecond);
 
     public AuthorizationToken createAuthorizationToken(Long memberId) {
         String accessToken = generateToken(memberId, accessExpiredSecond);
@@ -55,16 +47,6 @@ public class JwtProvider {
         Instant expiredTime = Instant.now().plus(validationSecond, ChronoUnit.SECONDS);
         return Jwts.builder()
                 .setSubject(String.valueOf(memberId))
-                .signWith(secretKey, SignatureAlgorithm.HS512)
-                .setExpiration(Date.from(expiredTime))
-                .compact();
-    }
-
-    private String generateToken(OidcUser oidcUser, Claims claims, Integer validationSecond) {
-        Instant expiredTime = Instant.now().plus(validationSecond, ChronoUnit.SECONDS);
-        return Jwts.builder()
-                .setSubject(oidcUser.getSubject())
-                .setClaims(claims)
                 .signWith(secretKey, SignatureAlgorithm.HS512)
                 .setExpiration(Date.from(expiredTime))
                 .compact();

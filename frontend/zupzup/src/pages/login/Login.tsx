@@ -11,7 +11,8 @@ import GoogleIcon from 'assets/icons/Google_logo.svg?react';
 const Login = () => {
   const navigate = useNavigate();
   const handleSocialLogin = async (domain: string) => {
-    window.location.href = `https://zupzup.shop/oauth2/authorization/${domain}`;
+    // window.location.href = `https://zupzup.shop/oauth2/authorization/${domain}`;
+    window.location.href = `http://localhost:8080/oauth2/authorization/${domain}`;
   };
 
   return (
@@ -32,8 +33,8 @@ const Login = () => {
         <SocialLoginButton
           $backgroundColor="#06BE34"
           color="#FFFFFF"
-          onClick={() => navigate(URL.LOGIN.REGIST_INFO.PHYSICAL)}
-          // onClick={() => handleSocialLogin(SOCIAL_KEY.NAVER)}
+          // onClick={() => navigate(URL.LOGIN.REGIST_INFO.PHYSICAL)}
+          onClick={() => handleSocialLogin(SOCIAL_KEY.NAVER)}
         >
           <NaverIcon />
           네이버로 시작하기

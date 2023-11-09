@@ -4,11 +4,14 @@ package com.twoez.zupzup.member.domain;
 import com.twoez.zupzup.member.exception.OauthProviderNotFoundException;
 import java.util.Arrays;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 public enum OauthProvider {
     KAKAO("KAKAO", "https://kauth.kakao.com"),
-    GOOGLE("GOOGLE", "https://accounts.google.com");
+    GOOGLE("GOOGLE", "https://accounts.google.com"),
+    NAVER("NAVER", "https://nid.naver.com");
 
     private static final String GOOGLE_OTHER_ISS = "accounts.google.com";
     private String provider;
@@ -20,6 +23,8 @@ public enum OauthProvider {
     }
 
     public static OauthProvider findByIss(String iss) {
+
+        log.info(iss);
         if (iss.equals(GOOGLE_OTHER_ISS)) {
             return OauthProvider.GOOGLE;
         }

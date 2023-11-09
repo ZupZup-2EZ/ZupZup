@@ -1,7 +1,9 @@
 package com.twoez.zupzup.config.security.handler;
 
 
-import com.twoez.zupzup.config.security.jwt.JwtProvider;
+import com.twoez.zupzup.config.security.jwt.AbstractJwtProvider;
+import com.twoez.zupzup.config.security.jwt.Oauth2JwtProvider;
+import com.twoez.zupzup.config.security.jwt.OidcJwtProvider;
 import com.twoez.zupzup.member.domain.OauthProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +23,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final JwtProvider jwtProvider;
+    private final Oauth2JwtProvider oauth2JwtProvider;
+    private final OidcJwtProvider oidcJwtProvider;
 
     @Value("${client.url}")
     private String clientUrl;
@@ -42,9 +46,19 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // ** 프론트의 요청을 받기 위해 authToken과 provider를 redirect로 넘겨주고 다시 받아 로그인 및 회원가입 처리
 
         log.info("onAuthenticationSuccess called");
-        OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
-        String authToken = jwtProvider.createAuthToken(oidcUser);
-        OauthProvider oauthProvider = OauthProvider.findByIss(oidcUser.getIssuer().toString());
+
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        String authToken;
+        OauthProvider oauthProvider;
+        if (oAuth2User instanceof OidcUser) {
+            authToken = oidcJwtProvider.createAuthToken(oAuth2User);
+            oauthProvider = OauthProvider.findByIss(((OidcUser) oAuth2User).getIssuer().toString());
+        } else {
+            authToken = oauth2JwtProvider.createAuthToken(oAuth2User);
+            oauthProvider = OauthProvider.findByIss(oAuth2User.getName());
+        }
+        log.info("{}", oAuth2User.getAttributes());
+
         String loginSuccessRedirectUrl =
                 clientUrl
                         + redirectUrl
@@ -53,6 +67,7 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                         + "&provider="
                         + oauthProvider.getProvider();
         getRedirectStrategy().sendRedirect(request, response, loginSuccessRedirectUrl);
+
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

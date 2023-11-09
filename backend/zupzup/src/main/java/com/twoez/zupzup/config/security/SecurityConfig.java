@@ -17,7 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -37,6 +41,7 @@ public class SecurityConfig {
     private final DefaultAccessDeniedHandler accessDeniedHandler;
     private final DefaultAuthenticationEntryPoint authenticationEntryPoint;
     private final OidcUserService oidcUserService;
+    private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService;
     private final AuthenticationSuccessHandler successHandler;
     private final AuthenticationFailureHandler failureHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -91,8 +96,9 @@ public class SecurityConfig {
                                                                 "/oauth2/authorization"))
                                         .userInfoEndpoint(
                                                 endpointConfig ->
-                                                        endpointConfig.oidcUserService(
-                                                                oidcUserService))
+                                                        endpointConfig
+                                                                .oidcUserService(oidcUserService)
+                                                                .userService(oAuth2UserService))
                                         .successHandler(successHandler)
                                         .failureHandler(failureHandler))
                 .sessionManagement(

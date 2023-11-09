@@ -3,7 +3,7 @@ package com.twoez.zupzup.member.service;
 
 import com.twoez.zupzup.config.security.exception.InvalidAuthorizationTokenException;
 import com.twoez.zupzup.config.security.jwt.AuthorizationToken;
-import com.twoez.zupzup.config.security.jwt.JwtProvider;
+import com.twoez.zupzup.config.security.jwt.AbstractJwtProvider;
 import com.twoez.zupzup.config.security.jwt.RefreshToken;
 import com.twoez.zupzup.global.exception.HttpExceptionCode;
 import com.twoez.zupzup.global.util.Assertion;
@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final JwtProvider jwtProvider;
+    private final AbstractJwtProvider abstractJwtProvider;
     private final MemberQueryRepository memberQueryRepository;
     private final MemberSpringDataRepository memberSpringDataRepository;
     private final RefreshTokenRedisRepository refreshTokenRedisRepository;
@@ -53,7 +53,7 @@ public class MemberService {
     }
 
     public AuthorizationToken issueAuthorizationToken(Long memberId) {
-        AuthorizationToken authorizationToken = jwtProvider.createAuthorizationToken(memberId);
+        AuthorizationToken authorizationToken = abstractJwtProvider.createAuthorizationToken(memberId);
         saveRefreshToken(memberId, authorizationToken);
         return authorizationToken;
     }
