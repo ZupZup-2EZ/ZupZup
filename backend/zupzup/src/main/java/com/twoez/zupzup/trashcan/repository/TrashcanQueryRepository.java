@@ -34,7 +34,7 @@ public class TrashcanQueryRepository extends QuerydslRepositorySupport {
                                                 "POINT({0},{1})",
                                                 trashcan.longitude,
                                                 trashcan.latitude)))
-                                .loe(5000L))
+                                .loe(3000L))
                 .fetch();
     }
 }
